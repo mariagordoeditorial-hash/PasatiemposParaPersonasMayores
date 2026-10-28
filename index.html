@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pasatiempos Extra</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Poppins:wght@500;700;800&display=swap">
+<style>
+/* Layout: una columna ancha y tranquila, como una página del cuaderno; botones grandes; navegación por pestañas grandes arriba */
+:root{
+  --bg:#fbf8f1; --paper:#ffffff; --ink:#123a5c; --ink2:#4a5a6a; --line:#d9d2c3;
+  --accent:#e2531c; --sun:#f5c431; --ok:#2f7d4f; --okbg:#e6f3ea;
+  --display:'Poppins',system-ui,sans-serif; --body:'Lora',Georgia,serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f1c29; --paper:#172838; --ink:#eaf1f7; --ink2:#a9b8c6; --line:#2c4155;
+  --accent:#ff7a45; --sun:#f5c431; --ok:#6fcf97; --okbg:#173a28; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1c29; --paper:#172838; --ink:#eaf1f7; --ink2:#a9b8c6; --line:#2c4155;
+  --accent:#ff7a45; --sun:#f5c431; --ok:#6fcf97; --okbg:#173a28; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:20px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 60px}
+.wrap{max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+header{display:flex;flex-direction:column;gap:6px;text-align:center;padding-top:6px}
+.kick{font-family:var(--display);font-weight:700;font-size:15px;letter-spacing:.14em;color:var(--accent)}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(30px,6vw,46px);line-height:1.08;margin:0;text-wrap:balance}
+h1 em{font-style:normal;color:var(--accent)}
+.lead{margin:4px auto 0;max-width:36em;color:var(--ink2)}
+nav{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+nav button,nav .navlink{font-family:var(--display);font-weight:700;font-size:17px;line-height:1.2;padding:16px 8px;border-radius:16px;border:2.5px solid var(--ink);
+  background:var(--paper);color:var(--ink);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;min-height:96px}
+nav .ico{font-size:30px;line-height:1}
+nav button[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+nav .navlink{text-decoration:none;justify-content:center;text-align:center;background:var(--sun);color:#1b1b1b;border-color:var(--ink)}
+nav .navlink:focus-visible{outline:4px solid var(--sun);outline-offset:3px}
+@media (max-width:620px){nav{grid-template-columns:repeat(2,1fr)}}
+section{display:flex;flex-direction:column;gap:20px}
+h2{font-family:var(--display);font-weight:800;font-size:30px;margin:0;text-wrap:balance}
+.box{background:var(--paper);border:2.5px solid var(--ink);border-radius:20px;padding:22px 24px;box-shadow:4px 5px 0 var(--ink)}
+.instr{border:2.5px dashed var(--ink);border-radius:20px;padding:16px 22px;display:flex;gap:16px;align-items:flex-start}
+.instr p{margin:0;flex:1;min-width:0}
+.big{font-family:var(--display);font-weight:700;font-size:20px;border:0;border-radius:999px;padding:16px 28px;cursor:pointer;
+  background:var(--accent);color:#fff;display:inline-flex;align-items:center;gap:10px;min-height:60px}
+.big.sec{background:var(--paper);color:var(--ink);border:2.5px solid var(--ink)}
+.big:focus-visible,nav button:focus-visible,.card:focus-visible,.snd:focus-visible{outline:4px solid var(--sun);outline-offset:3px}
+.say{flex:none;background:var(--sun);color:#1b1b1b;font-family:var(--display);font-weight:700;font-size:16px;border:0;border-radius:999px;padding:10px 16px;cursor:pointer;min-height:48px}
+/* sonidos */
+.snds{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media (max-width:560px){.snds{grid-template-columns:1fr}}
+.snd{display:flex;align-items:center;gap:16px;padding:14px 16px;border-radius:18px;border:2.5px solid var(--ink);background:var(--paper);cursor:pointer;text-align:left;color:var(--ink);font:inherit}
+.snd .n{flex:none;width:52px;height:52px;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:22px}
+.snd .tx{flex:1;min-width:0;font-family:var(--display);font-weight:700;font-size:19px}
+.snd .tx small{display:block;font-family:var(--body);font-weight:400;font-size:16px;color:var(--ink2)}
+.snd.playing{background:var(--sun);color:#1b1b1b}.snd.playing .tx small{color:#333}
+.reveal{margin-top:4px;font-size:17px;color:var(--ok);font-weight:600}
+.sol{display:flex;flex-wrap:wrap;gap:10px}
+.sol span{background:var(--okbg);color:var(--ok);border-radius:999px;padding:6px 14px;font-family:var(--display);font-weight:700;font-size:16px}
+/* cuente */
+.lists{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media (max-width:620px){.lists{grid-template-columns:1fr}}
+.opt{border:2.5px solid var(--ink);border-radius:16px;padding:14px;background:var(--paper);cursor:pointer;color:var(--ink);font:inherit;text-align:left}
+.opt b{display:block;font-family:var(--display);font-size:18px}
+.opt span{font-size:16px;color:var(--ink2)}
+.opt[aria-pressed="true"]{background:var(--ink);color:var(--bg)}.opt[aria-pressed="true"] span{color:var(--bg)}
+.speed{display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-family:var(--display);font-weight:700}
+.speed button{font:inherit;font-size:17px;padding:10px 18px;border-radius:999px;border:2.5px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer;min-height:48px}
+.speed button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.stage{text-align:center;padding:30px 16px;font-family:var(--display);font-weight:800;font-size:clamp(40px,10vw,72px);min-height:150px;display:grid;place-items:center;letter-spacing:.02em}
+.stage.small{font-size:22px;font-weight:700;color:var(--ink2)}
+.row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.answer{text-align:center;font-size:20px}
+.answer b{font-family:var(--display);font-size:26px;color:var(--accent)}
+/* memoria */
+.board{display:grid;gap:12px;grid-template-columns:repeat(4,1fr);max-width:640px;margin:0 auto;width:100%}
+.card{aspect-ratio:1/1;max-width:100%;border-radius:16px;border:2.5px solid var(--ink);background:var(--ink);cursor:pointer;padding:0;position:relative;perspective:600px}
+.card .face{position:absolute;inset:0;border-radius:13px;display:grid;place-items:center;backface-visibility:hidden;transition:transform .35s}
+.card .back{background:var(--ink);color:var(--sun);font-family:var(--display);font-weight:800;font-size:clamp(26px,6vw,40px)}
+.card .front{background:#fff;transform:rotateY(180deg)}
+.card.up .back{transform:rotateY(180deg)}.card.up .front{transform:rotateY(0)}
+.card.done .front{background:#e6f3ea}
+.card svg{width:78%;height:78%}
+.card .d{fill:#fff;stroke:#1f1c19;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.card .n{fill:none}.card .k{fill:#1f1c19}.card .t{stroke-width:2}
+.score{display:flex;justify-content:center;gap:28px;font-family:var(--display);font-weight:700;font-size:19px;flex-wrap:wrap}
+.win{text-align:center;font-family:var(--display);font-weight:800;font-size:26px;color:var(--ok)}
+/* guia */
+ol.steps{margin:0;padding-left:1.4em;display:flex;flex-direction:column;gap:12px}
+ol.steps li::marker{font-family:var(--display);font-weight:800;color:var(--accent)}
+.note{font-size:16px;color:var(--ink2);text-align:center}
+@media (prefers-reduced-motion:reduce){.card .face{transition:none}}
+</style>
+
+</head><body>
+<div class="wrap">
+<header>
+  <div class="kick">CONTENIDO EXTRA DEL CUADERNO</div>
+  <h1>Pasatiempos para <em>Personas Mayores</em></h1>
+  <p class="lead">Ejercicios para escuchar y jugar en el móvil, la tablet o el ordenador. Suba el volumen y elija una actividad.</p>
+</header>
+
+<nav role="tablist" aria-label="Actividades">
+  <button role="tab" id="t-sonidos" data-v="sonidos" aria-selected="true"><span class="ico">🔔</span>Escuche y adivine</button>
+  <button role="tab" id="t-cuente" data-v="cuente" aria-selected="false"><span class="ico">👂</span>Escuche y cuente</button>
+  <button role="tab" id="t-memoria" data-v="memoria" aria-selected="false"><span class="ico">🃏</span>Juego de parejas</button>
+  <a class="navlink" href="otro-libro.html"><span class="ico">📚</span>Historias Cortas para Personas Mayores</a>
+</nav>
+
+<!-- SONIDOS -->
+<section id="v-sonidos" role="tabpanel">
+  <h2>Escuche y adivine</h2>
+  <div class="instr"><p id="i-son">Pulse cada número para escuchar un sonido de la vida diaria. Piense qué es y escríbalo en su cuaderno. Puede escucharlo todas las veces que quiera.</p><button class="say" data-say="i-son" data-audio="audio/instr-sonidos.mp3">🔊 Escuchar</button></div>
+  <div class="snds" id="snds"></div>
+  <div class="box">
+    <div class="row" style="justify-content:flex-start"><button class="big sec" id="showSol">Ver las soluciones</button></div>
+    <div class="sol" id="sol" hidden style="margin-top:14px"></div>
+  </div>
+</section>
+
+<!-- CUENTE -->
+<section id="v-cuente" role="tabpanel" hidden>
+  <h2>Escuche y cuente</h2>
+  <div class="instr"><p id="i-cue">Elija una lista. Se oirán palabras despacio, una detrás de otra. Cada vez que oiga una palabra del grupo que le indicamos, dé un golpecito en la mesa y lleve la cuenta. Al final, compruebe su resultado.</p><button class="say" data-say="i-cue" data-audio="audio/instr-cuente.mp3">🔊 Escuchar</button></div>
+  <div class="lists" id="lists"></div>
+  <div class="speed" role="group" aria-label="Velocidad">Velocidad:
+    <button data-s="3200" aria-pressed="true">Despacio</button><button data-s="2200" aria-pressed="false">Normal</button><button data-s="1500" aria-pressed="false">Rápido</button>
+  </div>
+  <div class="box">
+    <div class="stage small" id="stage">Pulse «Empezar» cuando esté preparado.</div>
+    <div class="row"><button class="big" id="go">▶ Empezar</button><button class="big sec" id="stop" hidden>■ Parar</button></div>
+    <div class="answer" id="ans" hidden></div>
+  </div>
+  <p class="note" id="novoice" hidden>Su navegador no tiene voz en español. Pruebe con otro navegador o pida a un acompañante que lea la lista del cuaderno.</p>
+</section>
+
+<!-- MEMORIA -->
+<section id="v-memoria" role="tabpanel" hidden>
+  <h2>Juego de parejas</h2>
+  <div class="instr"><p id="i-mem">Todas las cartas están boca abajo. Dé la vuelta a dos cartas. Si son iguales, se quedan descubiertas. Si no, vuelven a taparse: intente recordar dónde estaba cada dibujo.</p><button class="say" data-say="i-mem" data-audio="audio/instr-parejas.mp3">🔊 Escuchar</button></div>
+  <div class="speed" role="group" aria-label="Dificultad">Dificultad:
+    <button data-p="6" aria-pressed="true">12 cartas</button><button data-p="8" aria-pressed="false">16 cartas</button><button data-p="10" aria-pressed="false">20 cartas</button>
+  </div>
+  <div class="score"><span>Intentos: <b id="tries">0</b></span><span>Parejas: <b id="pairs">0</b></span></div>
+  <div class="board" id="board"></div>
+  <div class="win" id="win" hidden></div>
+  <div class="row"><button class="big sec" id="again">↻ Empezar de nuevo</button></div>
+</section>
+
+
+
+<p class="note"><a href="otro-libro.html" style="color:inherit">¿Le gustan los refranes y los recuerdos? Descubra «Historias Cortas para Personas Mayores» →</a></p>
+<p class="note">Contenido complementario del cuaderno «Pasatiempos para Personas Mayores» · © 2026 Maria Gordo</p>
+</div>
+
+<script>
+const ICONS = {"manzana": "\n<path d=\"M50 32 C38 20 13 26 14 54 C15 80 33 94 50 86 C67 94 85 80 86 54 C87 26 62 20 50 32Z\"/>\n<path class=\"n\" d=\"M50 32 Q52 20 57 11\"/>\n<path class=\"k\" d=\"M55 24 Q66 10 82 14 Q74 28 55 24Z\"/>\n<path class=\"n t\" d=\"M25 50 Q26 41 33 36\"/>\n<path class=\"n t\" d=\"M22 60 Q22 57 23 55\"/>\n", "pera": "\n<path d=\"M50 16 C41 16 40 27 40 36 C40 47 21 55 21 73 C21 89 36 95 50 95 C64 95 79 89 79 73 C79 55 60 47 60 36 C60 27 59 16 50 16Z\"/>\n<path class=\"n\" d=\"M50 16 Q50 9 55 4\"/>\n<path class=\"k\" d=\"M53 13 Q64 3 75 8 Q66 18 53 13Z\"/>\n<path class=\"n t\" d=\"M31 70 Q31 61 37 56\"/>\n<circle class=\"k\" cx=\"57\" cy=\"78\" r=\"1.4\"/><circle class=\"k\" cx=\"63\" cy=\"70\" r=\"1.2\"/><circle class=\"k\" cx=\"45\" cy=\"84\" r=\"1.2\"/>\n", "sol": "\n<circle cx=\"50\" cy=\"50\" r=\"20\"/>\n<circle class=\"n t\" cx=\"50\" cy=\"50\" r=\"13\"/>\n<path class=\"n\" d=\"M50 8 V20 M50 80 V92 M8 50 H20 M80 50 H92 M20 20 L28 28 M72 72 L80 80 M80 20 L72 28 M28 72 L20 80\"/>\n", "barco": "\n<path class=\"n\" d=\"M50 8 V70\"/>\n<path class=\"k\" d=\"M50 8 L64 13 L50 18Z\"/>\n<path d=\"M48 22 Q24 44 20 66 H48Z\"/>\n<path d=\"M54 24 Q76 44 78 66 H54Z\"/>\n<path d=\"M8 70 H92 L80 88 H22Z\"/>\n<path class=\"n t\" d=\"M26 78 H76\"/>\n<path class=\"n t\" d=\"M2 94 Q12 88 22 94 T42 94 T62 94 T82 94\"/>\n", "flor": "\n<path class=\"n\" d=\"M50 56 V96\"/>\n<path d=\"M50 80 Q30 70 24 78 Q34 88 50 84Z\"/><path d=\"M50 72 Q68 60 76 68 Q66 80 50 76Z\"/>\n<circle cx=\"50\" cy=\"20\" r=\"11\"/><circle cx=\"68\" cy=\"32\" r=\"11\"/><circle cx=\"62\" cy=\"52\" r=\"11\"/><circle cx=\"38\" cy=\"52\" r=\"11\"/><circle cx=\"32\" cy=\"32\" r=\"11\"/>\n<circle class=\"k\" cx=\"50\" cy=\"38\" r=\"10\"/>\n", "reloj": "\n<circle cx=\"50\" cy=\"54\" r=\"36\"/>\n<circle class=\"n t\" cx=\"50\" cy=\"54\" r=\"30\"/>\n<path class=\"k\" d=\"M30 12 L18 24 L14 18 Q20 10 30 12Z M70 12 L82 24 L86 18 Q80 10 70 12Z\"/>\n<path class=\"n\" d=\"M50 54 V34 M50 54 L64 62\"/>\n<g class=\"k\"><circle cx=\"50\" cy=\"28\" r=\"2\"/><circle cx=\"76\" cy=\"54\" r=\"2\"/><circle cx=\"50\" cy=\"80\" r=\"2\"/><circle cx=\"24\" cy=\"54\" r=\"2\"/></g>\n<circle class=\"k\" cx=\"50\" cy=\"54\" r=\"3\"/>\n<path class=\"n\" d=\"M30 86 L24 94 M70 86 L76 94\"/>\n", "tetera": "\n<path d=\"M22 66 Q10 60 6 40 L2 36 L10 34 L12 40 Q16 52 24 56Z\"/>\n<path d=\"M76 46 Q96 44 94 60 Q92 74 74 74\"/>\n<path class=\"n\" d=\"M76 52 Q88 52 86 62 Q84 68 74 68\"/>\n<path d=\"M18 62 Q18 34 50 34 Q82 34 82 62 Q82 86 50 86 Q18 86 18 62Z\"/>\n<path d=\"M30 36 Q50 26 70 36Z\"/>\n<circle cx=\"50\" cy=\"24\" r=\"5\"/>\n<path class=\"k\" d=\"M30 86 H70 L66 92 H34Z\"/>\n<path class=\"n t\" d=\"M26 58 Q28 46 38 42\"/>\n", "paraguas": "\n<path d=\"M6 50 Q10 14 50 12 Q90 14 94 50 Q86 44 78 50 Q70 44 62 50 Q56 44 50 50 Q44 44 38 50 Q30 44 22 50 Q14 44 6 50Z\"/>\n<path class=\"n t\" d=\"M50 12 Q36 30 38 50 M50 12 Q64 30 62 50 M50 12 Q22 26 22 50 M50 12 Q78 26 78 50\"/>\n<path class=\"n\" d=\"M50 50 V84 Q50 92 42 92 Q36 92 36 86\"/>\n<path class=\"n\" d=\"M50 6 V12\"/>\n", "llave": "\n<circle cx=\"28\" cy=\"50\" r=\"18\"/>\n<circle class=\"k\" cx=\"24\" cy=\"50\" r=\"5\"/>\n<path d=\"M46 45 H92 V55 H86 V66 H78 V55 H72 V62 H64 V55 H46Z\"/>\n", "casa": "\n<path d=\"M8 50 L50 12 L92 50\"/>\n<path d=\"M18 44 V90 H82 V44 L50 16Z\"/>\n<rect x=\"42\" y=\"62\" width=\"16\" height=\"28\"/>\n<rect class=\"n t\" x=\"24\" y=\"54\" width=\"12\" height=\"12\"/><rect class=\"n t\" x=\"64\" y=\"54\" width=\"12\" height=\"12\"/>\n<rect x=\"66\" y=\"20\" width=\"10\" height=\"16\"/>\n", "pez_rojo": "\n<path d=\"M8 50 Q30 18 62 32 Q70 36 74 44 L94 26 Q88 50 94 74 L74 56 Q68 66 60 70 Q30 82 8 50Z\"/>\n<path d=\"M36 30 Q44 14 58 18 L56 32Z\"/>\n<path d=\"M40 66 Q44 78 54 80 L54 68Z\"/>\n<circle cx=\"24\" cy=\"44\" r=\"5\"/><circle class=\"k\" cx=\"25\" cy=\"44\" r=\"2.4\"/>\n<path class=\"n t\" d=\"M42 36 Q48 50 42 64 M52 38 Q58 50 52 62 M62 40 Q66 50 62 60\"/>\n<path class=\"n t\" d=\"M12 54 Q16 56 20 54\"/>\n", "gato_sentado": "\n<path d=\"M30 92 Q14 92 16 70 Q18 48 34 40 Q30 30 32 20 L28 4 L40 14 Q46 12 52 14 L62 4 L60 22 Q64 34 56 42 Q72 52 72 74 Q72 86 66 92Z\"/>\n<path d=\"M66 90 Q88 92 90 74 Q92 62 84 60\"/>\n<circle class=\"k\" cx=\"40\" cy=\"26\" r=\"2.4\"/><circle class=\"k\" cx=\"54\" cy=\"26\" r=\"2.4\"/>\n<path class=\"k\" d=\"M44 32 h6 l-3 3Z\"/>\n<path class=\"n t\" d=\"M36 70 Q34 84 40 92 M56 70 Q58 84 52 92\"/>\n", "perro": "\n<path d=\"M30 94 Q22 94 22 82 Q22 60 34 50 L32 40 Q24 40 22 30 Q20 18 32 14 Q44 10 52 18 Q58 26 54 34 L52 40 Q66 46 70 64 Q72 78 66 94Z\"/>\n<path class=\"k\" d=\"M24 18 Q14 22 14 36 Q18 42 24 40 Q22 30 28 22Z\"/>\n<circle class=\"k\" cx=\"40\" cy=\"26\" r=\"2.6\"/>\n<ellipse class=\"k\" cx=\"52\" cy=\"30\" rx=\"3.4\" ry=\"2.6\"/>\n<path class=\"n t\" d=\"M44 36 Q48 38 52 36\"/>\n<path class=\"n\" d=\"M34 44 Q44 48 54 42\" stroke-width=\"4\"/>\n<path d=\"M66 82 Q86 82 88 66 Q90 58 84 58\"/>\n<path class=\"n t\" d=\"M36 94 V76 M52 94 V76\"/>\n", "taza_sola": "\n<path d=\"M70 40 Q90 40 88 56 Q86 70 68 70\"/>\n<path class=\"n\" d=\"M72 48 Q80 48 80 56 Q78 62 70 62\"/>\n<path d=\"M14 32 H74 Q74 84 44 84 Q14 84 14 32Z\"/>\n<ellipse class=\"k\" cx=\"44\" cy=\"33\" rx=\"29\" ry=\"5\"/>\n<path class=\"n t\" d=\"M22 44 Q24 60 32 70\"/>\n", "sombrero": "\n<path d=\"M6 70 Q50 54 94 70 Q96 80 80 82 Q50 90 20 82 Q4 80 6 70Z\"/>\n<path d=\"M26 66 Q24 30 50 26 Q76 30 74 66 Q50 74 26 66Z\"/>\n<path class=\"k\" d=\"M26 56 Q50 64 74 56 V64 Q50 72 26 64Z\"/>\n", "bicicleta": "\n<circle cx=\"22\" cy=\"66\" r=\"18\"/><circle cx=\"78\" cy=\"66\" r=\"18\"/>\n<circle class=\"k\" cx=\"22\" cy=\"66\" r=\"3\"/><circle class=\"k\" cx=\"78\" cy=\"66\" r=\"3\"/>\n<path class=\"n\" d=\"M22 66 L40 40 H70 L78 66 M40 40 L50 66 L70 40 M50 66 H22 M36 30 L40 40 M70 40 L66 26 H76\"/>\n<path d=\"M30 28 H44 Q46 32 42 34 H32Z\"/>\n<circle class=\"n\" cx=\"50\" cy=\"66\" r=\"4\"/>\n"};
+// ───────── navegación ─────────
+const views=['sonidos','cuente','memoria'];
+function show(v){ if(!views.includes(v)) v='sonidos';
+  views.forEach(x=>{document.getElementById('v-'+x).hidden=(x!==v);document.getElementById('t-'+x).setAttribute('aria-selected',x===v)});
+  stopAll(); }
+document.querySelectorAll('nav button[data-v]').forEach(b=>b.onclick=()=>{location.hash=b.dataset.v;show(b.dataset.v)});
+addEventListener('hashchange',()=>show(location.hash.slice(1)));
+
+// ───────── voz ─────────
+const synth=window.speechSynthesis; let VOICE=null;
+function pickVoice(){ if(!synth) return; const vs=synth.getVoices();
+  VOICE=vs.find(v=>/^es[-_]ES/i.test(v.lang))||vs.find(v=>/^es/i.test(v.lang))||null; }
+if(synth){pickVoice(); synth.onvoiceschanged=pickVoice;}
+function speak(text,rate=0.9){ return new Promise(res=>{ if(!synth){res();return;}
+  const u=new SpeechSynthesisUtterance(text); u.lang='es-ES'; if(VOICE) u.voice=VOICE; u.rate=rate; u.onend=res; u.onerror=res; synth.speak(u); }); }
+function stopSpeech(){ try{synth&&synth.cancel()}catch(e){} }
+let instrA=null;
+function stopInstr(){ if(instrA){ try{instrA.pause()}catch(e){} instrA=null; } }
+document.querySelectorAll('.say').forEach(b=>b.onclick=()=>{ const was=instrA&&!instrA.paused&&instrA.dataset.k===b.dataset.say; stopAll(); if(was) return;
+  const a=new Audio(b.dataset.audio); a.dataset.k=b.dataset.say; instrA=a;
+  a.onerror=()=>{ if(instrA===a){ instrA=null; speak(document.getElementById(b.dataset.say).textContent); } };
+  a.play().catch(()=>{}); });
+
+// ───────── sonidos (archivos) ─────────
+const ANS=['Un timbre de casa','Un teléfono antiguo sonando','Un reloj haciendo tic-tac','Las campanas de una iglesia','El claxon de un coche','La lluvia','Las olas del mar','El silbato de un árbitro','Un pájaro cantando','Una tetera silbando','Los latidos del corazón','Un trueno en una tormenta'];
+const sndBox=document.getElementById('snds'); let cur=null, curBtn=null;
+function resetBtn(b){ if(!b) return; b.classList.remove('playing'); b.querySelector('small').textContent='Pulse para escuchar otra vez'; }
+ANS.forEach((a,i)=>{ const b=document.createElement('button'); b.className='snd'; b.id='snd'+(i+1);
+  b.innerHTML=`<span class="n">${i+1}</span><span class="tx">Sonido ${i+1}<small>Pulse para escuchar</small></span>`;
+  b.onclick=()=>{ const again=(curBtn===b && cur && !cur.paused); stopAll(); if(again) return;
+    cur=new Audio('audio/sonido'+(i+1)+'.mp3'); curBtn=b; b.classList.add('playing'); b.querySelector('small').textContent='Sonando… (pulse para parar)';
+    cur.onended=()=>resetBtn(b); cur.onerror=()=>{resetBtn(b); b.querySelector('small').textContent='No se pudo cargar el sonido';};
+    cur.play().catch(()=>resetBtn(b)); };
+  sndBox.appendChild(b); });
+const solEl=document.getElementById('sol');
+solEl.innerHTML=ANS.map((a,i)=>`<span>${i+1}. ${a}</span>`).join('');
+document.getElementById('showSol').onclick=e=>{solEl.hidden=!solEl.hidden; e.target.textContent=solEl.hidden?'Ver las soluciones':'Ocultar las soluciones';};
+function stopSounds(){ if(cur){ try{cur.pause();}catch(e){} cur=null; } resetBtn(curBtn); curBtn=null; }
+
+// ───────── escuche y cuente ─────────
+const LISTS=[
+ {t:'Lista 1 · Animales', q:'animales', note:'Como en el cuaderno', w:'mesa,perro*,manzana,coche,gato*,silla,pera,caballo*,libro,naranja,ventana,vaca*,uva,lápiz,gallina*,plátano,reloj,fresa,oveja*,zapato,cereza,conejo*,puerta,melón,pato*,camisa,limón,burro*,sombrero,cerdo*'},
+ {t:'Lista 2 · Prendas de ropa', q:'prendas de ropa', note:'Dificultad media', w:'falda*,tren,cuchara,abrigo*,nube,bufanda*,martillo,piano,calcetín*,tomate,botella,guante*,río,camisa*,escoba,cartero,jersey*,lámpara,montaña,pantalón*,azúcar,sombrero*,tijeras,ventana,chaqueta*,radio,sartén,vestido*'},
+ {t:'Lista 3 · Colores', q:'colores', note:'La más difícil: algunas palabras se parecen', w:'rojo*,rosa*,roca,azul*,azúcar,verde*,verano,marrón*,marea,blanco*,banco,negro*,nevera,amarillo*,amable,gris*,grillo,naranja*,narices,morado*,mosca,violeta*,viola,dorado*,dormido'}
+];
+let LI=0, SPEED=3200, running=false;
+const listEl=document.getElementById('lists');
+LISTS.forEach((l,i)=>{ const b=document.createElement('button'); b.className='opt'; b.setAttribute('aria-pressed',i===0); b.innerHTML=`<b>${l.t}</b><span>Cuente los ${l.q}. ${l.note}.</span>`;
+  b.onclick=()=>{ if(running) return; LI=i; listEl.querySelectorAll('.opt').forEach((x,k)=>x.setAttribute('aria-pressed',k===i)); resetCount(); }; listEl.appendChild(b); });
+document.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{SPEED=+b.dataset.s; document.querySelectorAll('[data-s]').forEach(x=>x.setAttribute('aria-pressed',x===b));});
+const stage=document.getElementById('stage'), ans=document.getElementById('ans'), go=document.getElementById('go'), stop=document.getElementById('stop');
+function resetCount(){ stage.className='stage small'; stage.textContent='Pulse «Empezar» cuando esté preparado.'; ans.hidden=true; }
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+let rec=null;
+function stopRec(){ if(rec){ try{rec.pause()}catch(e){} rec=null; } }
+function finish(L,words,target){ stage.className='stage small'; stage.textContent='Fin de la lista. ¿Cuántos ha contado?';
+  ans.innerHTML=`<button class="big sec" id="showAns">Ver la respuesta</button>`; ans.hidden=false;
+  document.getElementById('showAns').onclick=()=>{ans.innerHTML=`Había <b>${target}</b> ${L.q}.<br><span class="note">Palabras: ${words.map(w=>w.endsWith('*')?'<b style="font-size:inherit">'+w.slice(0,-1)+'</b>':w).join(', ')}</span>`;};
+  running=false; go.hidden=false; stop.hidden=true; }
+function playRecorded(L,words,target){ return new Promise(res=>{ const a=new Audio(`audio/lista${LI+1}.mp3`);
+  a.onerror=()=>res(false); a.onended=()=>{ if(running) finish(L,words,target); res(true); };
+  a.oncanplay=()=>{ if(rec!==a) return; stage.className='stage'; stage.textContent='👂'; };
+  rec=a; a.play().then(()=>{}).catch(()=>res(false)); }); }
+go.onclick=async()=>{ stopAll(); running=true; go.hidden=true; stop.hidden=false; ans.hidden=true;
+  const L=LISTS[LI]; const words=L.w.split(','); const target=words.filter(w=>w.endsWith('*')).length;
+  stage.className='stage small'; stage.textContent=`Cuente los ${L.q}. Escuche con atención…`;
+  if(await playRecorded(L,words,target)) return; rec=null; if(!running) return;
+  if(!synth){document.getElementById('novoice').hidden=false; running=false; go.hidden=false; stop.hidden=true; return;}
+  stage.className='stage small'; stage.textContent=`Cuente los ${L.q}. Escuche con atención…`; await speak(`Vamos a empezar. Cuente los ${L.q}.`); await sleep(1200);
+  for(let i=0;i<words.length && running;i++){ const w=words[i].replace('*',''); stage.className='stage'; stage.textContent='●'; const t0=performance.now(); await speak(w,.85); const left=SPEED-(performance.now()-t0); if(left>0) await sleep(left); }
+  if(running){ await speak('Fin de la lista. ¿Cuántos ha contado?'); finish(L,words,target); } };
+stop.onclick=()=>{ running=false; stopSpeech(); stopRec(); resetCount(); go.hidden=false; stop.hidden=true; };
+
+// ───────── memoria ─────────
+let PAIRS=6, first=null, lock=false, tries=0, found=0;
+const board=document.getElementById('board');
+function svg(n){return `<svg viewBox="0 0 100 100" aria-hidden="true"><g class="d">${ICONS[n]}</g></svg>`}
+function deal(){ const names=Object.keys(ICONS).sort(()=>Math.random()-.5).slice(0,PAIRS); const deck=[...names,...names].sort(()=>Math.random()-.5);
+  tries=0; found=0; first=null; lock=false; upd(); document.getElementById('win').hidden=true;
+  board.style.gridTemplateColumns=`repeat(${PAIRS===6?4:(PAIRS===8?4:5)},1fr)`;
+  board.innerHTML=deck.map((n,i)=>`<button class="card" data-n="${n}" aria-label="Carta ${i+1}, boca abajo"><span class="face back">?</span><span class="face front">${svg(n)}</span></button>`).join('');
+  board.querySelectorAll('.card').forEach(c=>c.onclick=()=>flip(c)); }
+function upd(){document.getElementById('tries').textContent=tries;document.getElementById('pairs').textContent=found+' de '+PAIRS;}
+function flip(c){ if(lock||c.classList.contains('up')) return; c.classList.add('up'); c.setAttribute('aria-label','Carta descubierta');
+  if(!first){first=c;return;} tries++; const a=first; first=null;
+  if(a.dataset.n===c.dataset.n){ a.classList.add('done'); c.classList.add('done'); found++; upd();
+    if(found===PAIRS){ const w=document.getElementById('win'); w.textContent=`¡Muy bien! Ha encontrado todas las parejas en ${tries} intentos.`; w.hidden=false; } }
+  else { upd(); lock=true; setTimeout(()=>{a.classList.remove('up');c.classList.remove('up');lock=false;},1300); } }
+document.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>{PAIRS=+b.dataset.p; document.querySelectorAll('[data-p]').forEach(x=>x.setAttribute('aria-pressed',x===b)); deal();});
+document.getElementById('again').onclick=deal;
+
+function stopAll(){ stopSounds(); stopSpeech(); stopRec(); stopInstr(); running=false; go.hidden=false; stop.hidden=true; }
+deal(); show(location.hash.slice(1));
+</script>
+
+</body></html>
